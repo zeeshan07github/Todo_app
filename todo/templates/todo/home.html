@@ -1,0 +1,93 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h1 class="text-center">Your TODO List</h1>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <a class="btn btn-primary" href="{% url 'todo:add_task' %}">Add Task +</a>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3 class="text-center">Completed Tasks</h3>
+                            <ul class="list-group">
+                                {% for task in completed_tasks %}
+                                    <li class="list-group-item list-group-item-success">
+                                        <a href="{% url 'todo:detail' task.id %}">{{ task.title }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h3 class="text-center">Incomplete Tasks</h3>
+                            <ul class="list-group">
+                                {% for task in incomplete_tasks %}
+                                    <li class="list-group-item list-group-item-danger">
+                                        <a href="{% url 'todo:detail' task.id %}">{{ task.title }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Custom CSS for spacing and alignment */
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa; /* Background color for the entire page */
+    }
+
+    h1, h2, h3 {
+        text-align: center;
+    }
+
+    .btn-link {
+        margin-right: 10px;
+    }
+
+    /* Adjust card styling */
+    .card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Center the card header text */
+    .card-header {
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        border-bottom: none; /* Remove the border at the bottom of the header */
+    }
+
+    /* Style list items */
+    .list-group-item {
+        border: 2px dashed rgb(157, 157, 157);
+        margin-top: 5px;
+    }
+
+    /* Style completed task items */
+    .list-group-item-success {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+    }
+
+    /* Style incomplete task items */
+    .list-group-item-danger {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+    }
+</style>
+{% endblock %}

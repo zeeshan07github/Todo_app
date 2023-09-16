@@ -1,0 +1,50 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Task Details</h2>
+                </div>
+                <div class="card-body">
+                    <div class="text-left">
+                        <h4>{{ task_todo.title }}</h4>
+                        <p>Created by: {{ task_todo.user }}</p>
+                        <p>Description: {{ task_todo.description }}</p>
+                        <p>Created at: {{ task_todo.created_at }}</p>
+                        <p>Due date: {{ task_todo.due_date }}</p>
+                        <p>Status: {% if task_todo.completed %}<span class="text-success">Completed</span>{% else %}<span class="text-danger">Not Completed</span>{% endif %}</p>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a onclick="alert('You have completed your task!')" class="btn btn-success" href="{% url 'todo:complete_task' task_todo.id %}">Complete Task</a>
+                        <a class="btn btn-danger" href="{% url 'todo:delete_task' task_todo.id %}">Delete Task</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Custom CSS for spacing and alignment */
+    body {
+        text-align: center;
+        
+    }
+
+    /* Adjust card styling */
+    .card {
+        
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Center the card header text */
+    .card-header {
+        text-align: center;
+    }
+</style>
+{% endblock %}
